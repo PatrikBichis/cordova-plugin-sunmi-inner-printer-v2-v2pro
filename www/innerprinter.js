@@ -5,6 +5,9 @@ module.exports = {
   printerInit: function (resolve, reject) {
     exec(resolve, reject, "Printer", "printerInit", []);
   },
+  cutPaper: function (resolve, reject) {
+    exec(resolve, reject, "Printer", "cutPaper", []);
+  },
   printerSelfChecking: function (resolve, reject) {
     exec(resolve, reject, "Printer", "printerSelfChecking", []);
   },

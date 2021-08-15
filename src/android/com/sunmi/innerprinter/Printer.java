@@ -117,6 +117,9 @@ public class Printer extends CordovaPlugin {
     if (action.equals("printerInit")) {
       printerInit(callbackContext, callback);
       return true;
+    } else if (action.equals("cutPaper")) {
+      cutPaper(callbackContext, callback);
+      return true;
     } else if (action.equals("printerSelfChecking")) {
       printerSelfChecking(callbackContext, callback);
       return true;
@@ -192,6 +195,22 @@ public class Printer extends CordovaPlugin {
       public void run() {
         try {
           printerService.printerInit(callback);
+        } catch (Exception e) {
+          e.printStackTrace();
+          Log.i(TAG, "ERROR: " + e.getMessage());
+          callbackContext.error(e.getMessage());
+        }
+      }
+    });
+  }
+
+   public void cutPaper(final CallbackContext callbackContext, final ICallback callback) {
+    final IWoyouService printerService = woyouService;
+    ThreadPoolManager.getInstance().executeTask(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          printerService.cutPaper(callback);
         } catch (Exception e) {
           e.printStackTrace();
           Log.i(TAG, "ERROR: " + e.getMessage());
